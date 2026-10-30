@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atajo URL | Acortador de enlaces de Katalina Jaramillo</title>
+  <meta name="description" content="Atajo URL convierte direcciones largas en enlaces cortos con UUID. Frontend en Amazon S3, API FastAPI en Amazon EC2 y datos en Amazon DynamoDB.">
+  <meta name="author" content="Katalina Jaramillo">
+  <meta name="theme-color" content="#d8d2fb">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al formulario</a>
+
+  <header class="topbar">
+    <p class="logo">
+      <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M5 24c5-14 13-17 22-11" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+        <circle cx="5" cy="24" r="3.4" fill="currentColor"/>
+        <path d="m21 7 6 6-7 3" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Atajo URL
+    </p>
+    <p class="topbar__author">por Katalina Jaramillo</p>
+  </header>
+
+  <main id="contenido" class="stage">
+    <h1 class="headline">Comparte enlaces largos con un atajo corto</h1>
+    <p class="lead">Pega la dirección y genera el atajo. Quien lo abra llega directo a la página original.</p>
+
+    <form id="shorten-form" class="composer" novalidate aria-labelledby="titulo-formulario">
+      <h2 id="titulo-formulario" class="visually-hidden">Crear un atajo</h2>
+      <label for="original-url" class="composer__label">Dirección web</label>
+      <div class="composer__field">
+        <input
+          id="original-url"
+          name="original_url"
+          class="composer__input"
+          type="url"
+          inputmode="url"
+          autocomplete="url"
+          placeholder="https://www.ejemplo.com/una-pagina-con-un-nombre-muy-largo"
+          maxlength="2048"
+          required
+          aria-describedby="url-hint url-error"
+        >
+        <button id="submit-button" class="composer__button" type="submit">Generar atajo</button>
+      </div>
+      <p id="url-hint" class="composer__hint">Incluye http:// o https:// al inicio.</p>
+      <p id="url-error" class="alert" role="alert" hidden></p>
+    </form>
+
+    <section id="result" class="route" aria-labelledby="titulo-resultado" hidden>
+      <h2 id="titulo-resultado" class="route__title">Tu atajo está listo</h2>
+
+      <div class="route__map">
+        <svg class="route__line" viewBox="0 0 40 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M8 6 C 34 40, 6 80, 30 114" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+        </svg>
+
+        <dl class="route__stops">
+          <div class="route__stop route__stop--from">
+            <dt>Destino original</dt>
+            <dd id="original-result" class="route__original"></dd>
+          </div>
+          <div class="route__stop route__stop--to">
+            <dt><label for="short-url">Atajo para compartir</label></dt>
+            <dd>
+              <div class="route__copy">
+                <input id="short-url" class="route__short" type="text" readonly>
+                <button id="copy-button" class="route__button" type="button">Copiar</button>
+              </div>
+              <p id="copy-status" class="route__status" role="status" aria-live="polite"></p>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="route__meta">
+        <p class="route__code">Código UUID: <span id="short-code"></span></p>
+        <a id="open-link" class="route__open" href="#" target="_blank" rel="noopener noreferrer">Abrir el atajo en otra pestaña</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="credits">
+    <p>Midterm Cloud</p>
+  </footer>
+</body>
+</html>

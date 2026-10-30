@@ -1,0 +1,427 @@
+/* ==========================================================================
+   Atajo URL - Katalina Jaramillo
+   Identidad: lavanda + tinta violeta + caléndula. Tipografía Bricolage Grotesque.
+   Estructura: fuente, variables, base, cabecera, escenario, formulario,
+   resultado (ruta), pie, utilidades, responsive.
+   ========================================================================== */
+
+/* Fuente autoalojada (SIL Open Font License, ver fonts/OFL.txt) ----------- */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variables de diseño ------------------------------------------------------ */
+:root {
+  --lavender: #d8d2fb;
+  --lavender-line: #a99ff0;
+  --ink: #1b1442;
+  --ink-soft: #463e72;
+  --ink-raised: #2b2363;
+  --marigold: #ffc23d;
+  --marigold-hover: #ffd36f;
+  --paper: #ffffff;
+  --mist: #c9c2f5;
+  --error-text: #8a1538;
+  --error-bg: #ffe3ea;
+
+  --font: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --measure: 46rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+
+  color-scheme: light;
+}
+
+/* Base --------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--lavender);
+}
+
+h1,
+h2,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: var(--gutter);
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  background-color: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Cabecera ----------------------------------------------------------------- */
+.topbar {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem var(--gutter);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.logo__mark {
+  width: 2rem;
+  height: 2rem;
+  color: var(--ink);
+}
+
+.topbar__author {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* Escenario principal ------------------------------------------------------ */
+.stage {
+  flex: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 7vw, 5rem) var(--gutter) 4rem;
+}
+
+.headline {
+  max-width: 14ch;
+  font-size: clamp(2.5rem, 7.5vw, 5.25rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-variation-settings: "wdth" 85;
+}
+
+.lead {
+  max-width: 36rem;
+  margin-top: 1.25rem;
+  color: var(--ink-soft);
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+}
+
+/* Formulario --------------------------------------------------------------- */
+.composer {
+  max-width: var(--measure);
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.composer__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.composer__field {
+  display: flex;
+  align-items: stretch;
+  padding: 0.375rem;
+  background-color: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.composer__field:focus-within {
+  box-shadow: 6px 6px 0 var(--ink), 0 0 0 4px var(--marigold);
+}
+
+.composer__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 3.25rem;
+  padding: 0 1.125rem;
+  font: inherit;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+}
+
+.composer__input::placeholder {
+  color: #6b6496;
+}
+
+.composer__input:focus-visible {
+  outline: none;
+}
+
+.composer__input[aria-invalid="true"] {
+  text-decoration: underline wavy var(--error-text) 1px;
+  text-underline-offset: 6px;
+}
+
+.composer__button {
+  flex-shrink: 0;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  background-color: var(--marigold);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.composer__button:hover:not(:disabled) {
+  background-color: var(--marigold-hover);
+}
+
+.composer__button:disabled {
+  cursor: progress;
+}
+
+.composer__hint {
+  margin-top: 0.75rem;
+  padding-left: 1.25rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.alert {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--error-text);
+  background-color: var(--error-bg);
+  border-left: 4px solid var(--error-text);
+  border-radius: 0 1rem 1rem 0;
+  font-weight: 600;
+}
+
+/* Resultado: la "ruta" del enlace original al atajo ------------------------ */
+.route {
+  max-width: var(--measure);
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  color: #f3f0ff;
+  background-color: var(--ink);
+  border-radius: 2rem 2rem 2rem 0.5rem;
+}
+
+.route__title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.route__map {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0 1rem;
+  margin-top: 1.5rem;
+}
+
+.route__line {
+  width: 100%;
+  height: 100%;
+  min-height: 8rem;
+  color: var(--marigold);
+}
+
+.route__line path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: draw-route 0.7s ease-out;
+}
+
+@keyframes draw-route {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+.route__stops {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.route__stop dt {
+  color: var(--mist);
+  font-size: 0.9375rem;
+}
+
+.route__original {
+  color: var(--mist);
+  overflow-wrap: anywhere;
+  text-decoration: line-through;
+  text-decoration-color: rgb(201 194 245 / 60%);
+}
+
+.route__copy {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+}
+
+.route__short {
+  flex: 1;
+  min-width: 0;
+  min-height: 3rem;
+  padding: 0 1rem;
+  font: inherit;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+  background-color: var(--ink-raised);
+  border: 2px solid var(--marigold);
+  border-radius: 0.75rem;
+}
+
+.route__button {
+  min-height: 3rem;
+  padding: 0 1.25rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  background-color: var(--marigold);
+  border: 0;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.route__button:hover {
+  background-color: var(--marigold-hover);
+}
+
+.route :focus-visible {
+  outline-color: var(--marigold);
+}
+
+.route__status {
+  min-height: 1.5rem;
+  margin-top: 0.375rem;
+  color: var(--marigold);
+  font-weight: 600;
+}
+
+.route__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ink-raised);
+}
+
+.route__code {
+  color: var(--mist);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.route__code span {
+  color: #f3f0ff;
+}
+
+.route__open {
+  padding-block: 0.25rem;
+  color: var(--marigold);
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
+/* Pie ---------------------------------------------------------------------- */
+.credits {
+  padding: 1.5rem var(--gutter) 2rem;
+  border-top: 2px solid var(--lavender-line);
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.credits p {
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+/* Responsive --------------------------------------------------------------- */
+@media (max-width: 36rem) {
+  .topbar__author {
+    display: none;
+  }
+
+  .composer__field {
+    flex-direction: column;
+    gap: 0.375rem;
+    border-radius: 1.5rem;
+  }
+
+  .composer__input {
+    padding: 0 0.75rem;
+  }
+
+  .route__map {
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0 0.75rem;
+  }
+
+  .route__copy {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route__line path {
+    animation: none;
+  }
+}
